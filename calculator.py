@@ -8,18 +8,60 @@ def clr_all():
 
 
 def bck_spc():
-    pass
+    entry1.delete(len(entry1.get()) - 1)
 
 
 def click(n):
-    entry1.insert('end', n)
+    if n == '**':
+        entry1.insert('end', '^')
+    elif n == 'math.sqrt(':
+        entry1.insert('end', '²√')
+    elif n == 'math.cos(':
+        entry1.insert('end', 'cos')
+    elif n == 'math.sin(':
+        entry1.insert('end', 'sin')
+    elif n == 'math.tan(':
+        entry1.insert('end', 'tan')
+    elif n == 'math.pi':
+        entry1.insert('end', 'π')
+    elif n == 'math.log(':
+        entry1.insert('end', 'log')
+    elif n == 'math.factorial(':
+        entry1.insert('end', '!')
+    else:
+        entry1.insert('end', n)
     return
 
 
 def equals():
-    e = eval(str(entry1.get()))
+    e1 = entry1.get()
+    if '^' in e1:
+        e1 = e1.replace('^', '**')
+    elif '²√' in e1:
+        e1 = e1.replace('²√', 'math.sqrt(')
+        e1 = str(e1 + ')')
+    elif 'sin' in e1:
+        e1 = e1.replace('sin', 'math.sin(')
+        e1 = str(e1 + ')')
+    elif 'cos' in e1:
+        e1 = e1.replace('cos', 'math.cos(')
+        e1 = str(e1 + ')')
+    elif 'tan' in e1:
+        e1 = e1.replace('tan', 'math.tan(')
+        e1 = str(e1 + ')')
+    elif 'log' in e1:
+        e1  = e1.replace('log', 'math.log(')
+        e1 = str(e1 + ')')
+    elif 'π' in e1:
+        e1 = e1.replace('π', 'math.pi')
+    elif '!' in e1:
+        e1 = e1.replace('!', 'math.factorial(')
+        e1 = str(e1 + ')')
+    e = eval(str(e1))
+
+
     entry1.delete(0, 'end')
-    entry1.insert('end', str(round(e, 8)))
+    entry1.insert('end', str(round(e, 10)))
 
 
 
@@ -33,7 +75,7 @@ window.title('My Calculator')
 frame1 = tk.Frame()
 frame1.pack(side='top')
 frame2 = tk.Frame()
-frame2.pack(side = 'top')
+frame2.pack(side='top')
 frame3 = tk.Frame()
 frame3.pack(side='top')
 frame4 = tk.Frame()
